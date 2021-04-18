@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import api from './api/api'
 
 function App() {
-  const api = {
-    weatherApi: {
-      key: "d355671dd4ee8898100b7f1969362cd6",
-      base: "http://api.weatherstack.com/current",
-    },
-    unsplashApi: {
-      key: "qh-b4-wEIqKayiSN-tKQ5JP8opkjnI6-YeoYqj_smnU",
-      base: "https://api.unsplash.com/search/photos?query=",
-    },
-  };
+
 
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({});
@@ -41,7 +33,7 @@ function App() {
   return (
     <Container
       background={
-        background ? background[Math.floor(Math.random() * 10)].urls.full : ""
+        background[0] ? background[Math.floor(Math.random() * 10)].urls.full : ""
       }
     >
       <Search onSubmit={search}>
