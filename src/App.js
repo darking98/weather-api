@@ -44,7 +44,7 @@ function App() {
           onChange={(e) => setCity(e.target.value)}
         />
 
-        {typeof weather.current !== "undefined" && background[0] ? (
+        {typeof weather.current !== "undefined" ? (
           [
             <Info>
               <h2>{weather.request.query}</h2>
