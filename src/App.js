@@ -12,14 +12,13 @@ function App() {
   const search = (e) => {
     e.preventDefault();
 
-    fetch(
-      `${api.weatherApi.base}?access_key=${api.weatherApi.key}&query=${city}`
-    )
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=london&units=metric&appid=650492c1a8ea62a9f853632d6f908d8e`)
       .then((response) => response.json())
       .then((data) => {
         setWeather(data);
         setCity("");
         console.log(data);
+        console.log(weather.current)
       });
 
     fetch(`${api.unsplashApi.base}${city}&client_id=${api.unsplashApi.key}`)
@@ -44,22 +43,22 @@ function App() {
           onChange={(e) => setCity(e.target.value)}
         />
 
-        {typeof weather.current !== "undefined" ? (
+        {typeof weather.main !== "undefined" ? (
           [
             <Info>
-              <h2>{weather.request.query}</h2>
-              <p>{weather.location.localtime}</p>
+              <h2>{weather.main.name}</h2>
+              {/*<p>{weather.location.localtime}</p>*/}
               <TempContainer>
                 <Temp>
-                  <h1>{weather.current.temperature}°C/</h1>
-                  <h3>FL {weather.current.feelslike}°C</h3>
+                  <h1>{weather.main.temp}°C/</h1>
+                  <h3>FL {weather.main.feels_like}°C</h3>
                 </Temp>
                 <TempIcons>
-                  <img src={weather.current.weather_icons[0]} alt="" />
+                  {/*<img src={weather.current.weather_icons[0]} alt="" />*/}
                 </TempIcons>
                 <TempDetails>
-                  <p>{weather.current.weather_descriptions[0]}</p>
-                  <p>Humidity {weather.current.humidity}%</p>
+                  <p>{weather.weather[0].description}</p>
+                  <p>Humidity {weather.main.humidity}%</p>
                 </TempDetails>
               </TempContainer>
             </Info>,
