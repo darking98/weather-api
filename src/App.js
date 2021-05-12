@@ -11,7 +11,7 @@ function App() {
 
   const search = (e) => {
     e.preventDefault();
-    fetch(`${api.weatherApi.base}?access_key=${api.weatherApi.key}&query=${city}`)
+    fetch(`https://cors-anywhere.herokuapp.com/${api.weatherApi.base}?access_key=${api.weatherApi.key}&query=${city}`)
       .then((response) => response.json())
       .then((data) => {
         setWeather(data);
