@@ -208,11 +208,11 @@ const DefaultInfo = styled.div`
 
 const Footer = styled.div`
   font-size: 15px;
-  color: ${(props) => (props.background ? "white" : "white")};
+  color: white;
   text-shadow: ${(props) => (props.background ? "0px 0px 10px #000" : "0")};
 
   a {
-    color: ${(props) => (props.background ? "white" : "white")};
+    color: white;
     text-decoration: none;
     transition: 0.4s ease;
     :hover {
