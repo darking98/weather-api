@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import api from './api/api'
 
 function App() {
 
-
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({});
   const [background, setBackground] = useState({});
+  const [random, setRandom] = useState(0);
 
   const search = (e) => {
     e.preventDefault();
-
     fetch(`${api.weatherApi.base}?access_key=${api.weatherApi.key}&query=${city}`)
       .then((response) => response.json())
       .then((data) => {
@@ -27,12 +26,15 @@ function App() {
         setBackground(data.results);
         console.log(background);
       });
+      setRandom(Math.floor(Math.random() * 10))
   };
+
+ 
 
   return (
     <Container
       background={
-        background[0] ? background[Math.floor(Math.random() * 10)].urls.full : ""
+        background[0] && background[random].urls.full 
       }
     >
       <Search onSubmit={search}>
