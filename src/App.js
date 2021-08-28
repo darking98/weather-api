@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import api from './api/api'
+import api from "./api/api";
 
 function App() {
-
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({});
   const [background, setBackground] = useState({});
@@ -11,13 +10,15 @@ function App() {
 
   const search = (e) => {
     e.preventDefault();
-    fetch(`https://cors-anywhere.herokuapp.com/${api.weatherApi.base}?access_key=${api.weatherApi.key}&query=${city}`)
+    fetch(
+      `https://cors-anywhere.herokuapp.com/${api.weatherApi.base}?access_key=${api.weatherApi.key}&query=${city}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setWeather(data);
         setCity("");
         console.log(data);
-        console.log(weather.current)
+        console.log(weather.current);
       });
 
     fetch(`${api.unsplashApi.base}${city}&client_id=${api.unsplashApi.key}`)
@@ -26,17 +27,11 @@ function App() {
         setBackground(data.results);
         console.log(background);
       });
-      setRandom(Math.floor(Math.random() * 10))
+    setRandom(Math.floor(Math.random() * 10));
   };
 
- 
-
   return (
-    <Container
-      background={
-        background[0] && background[random].urls.full 
-      }
-    >
+    <Container background={background[0] && background[random].urls.full}>
       <Search onSubmit={search}>
         <input
           type="text"
@@ -101,6 +96,9 @@ const Container = styled.div`
       : "#2B2B3D"};
   background-size: cover;
   transition: 2s ease-out;
+  @media (max-width: 800px) {
+    padding: 0px 30px;
+  }
 `;
 
 const Search = styled.form`
@@ -110,9 +108,6 @@ const Search = styled.form`
   height: 750px;
   text-align: center;
 
-  @media (max-width: 800px) {
-    width: 375px;
-  }
   input {
     width: 500px;
     padding: 5px 20px;
@@ -210,7 +205,7 @@ const Footer = styled.div`
   font-size: 15px;
   color: white;
   text-shadow: ${(props) => (props.background ? "0px 0px 10px #000" : "0")};
-
+  padding: 20px 0px;
   a {
     color: white;
     text-decoration: none;
